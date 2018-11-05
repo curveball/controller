@@ -45,7 +45,7 @@ import { router } from '@curveball/router';
 const app = new Application();
 
 app.use(
-  router('/hello-world', new MyController()
+  router('/hello-world', new MyController())
 );
 ```
 
