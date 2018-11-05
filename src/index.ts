@@ -1,5 +1,5 @@
 import { Context, middlewareCall } from '@curveball/core';
-import { NotImplemented, MethodNotAllowed } from '@curveball/http-errors';
+import { MethodNotAllowed, NotImplemented } from '@curveball/http-errors';
 import http from 'http';
 
 export default class Controller {
@@ -50,6 +50,6 @@ export default class Controller {
 
     return this.dispatch(ctx);
 
-  };
+  }
 
 }
