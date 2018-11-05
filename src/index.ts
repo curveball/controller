@@ -36,6 +36,16 @@ export default class Controller {
 
   }
 
+  /**
+   * The default implementation of the HTTP OPTIONS requests automatically
+   * responds with an empty body an an Allow header
+   */
+  options(ctx: Context) {
+
+    ctx.response.headers.set('Allow', this.allowedMethods());
+
+  }
+
   [middlewareCall](ctx: Context): Promise<void> | void {
 
     return this.dispatch(ctx);
