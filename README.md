@@ -7,7 +7,6 @@ applications.
 It's usage is entrirely optional, and it's meant to implement exactly one
 design pattern.
 
-
 Installation
 ------------
 

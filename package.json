@@ -4,9 +4,10 @@
   "description": "A simple controller pattern for Curveball.js",
   "main": "dist/index.js",
   "scripts": {
-    "prepublish": "make build",
+    "prepublishOnly": "make build",
     "test": "make lint test",
-    "tsc": "tsc"
+    "tsc": "tsc",
+    "start": "make start"
   },
   "repository": {
     "type": "git",
