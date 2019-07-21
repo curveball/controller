@@ -1,6 +1,8 @@
 Curveball Controller
 =====================
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/curveballjs/controller.svg)](https://greenkeeper.io/)
+
 This package provides a very simple controller pattern for curveballjs
 applications.
 
