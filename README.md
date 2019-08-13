@@ -1,11 +1,20 @@
 Curveball Controller
 =====================
 
-This package provides a very simple controller pattern for curveballjs
+This package provides a simple controller pattern for curveballjs
 applications.
 
-It's usage is entrirely optional, and it's meant to implement exactly one
-design pattern.
+It's usage in the Curveball framework is entrirely optional, but it makes
+designing resource-oriented API's easier.
+
+Basic features
+
+* Handles all methods for a single route in an application.
+* Implements the `OPTIONS` method and returns all supported HTTP methods in
+  an `Allow` header.
+* Automatically throws a `405 Method Not Allowed` for unsupported methods.
+* Support for negotiating the `Accept` header.
+
 
 Installation
 ------------
@@ -58,9 +67,8 @@ This makes it slightly different from common controllers from many popular
 frameworks, where a single controller typically handles a 'group' of
 functionality with `index`, `create`, `update`, `read` and `delete` functions.
 
-We think it's better design.
-
-To model the same idea in with this package, you must do it with 2 controllers:
+To model the same index, create, update, read, delete functions with this
+controller, you just need two controllers instead:
 
 ```typescript
 class Collection extends Controller {
@@ -74,6 +82,7 @@ class Collection extends Controller {
   }
 
 }
+
 class Item extends Controller {
 
   get(ctx: Context) {
@@ -89,6 +98,77 @@ class Item extends Controller {
   }
 }
 ```
+
+And then to use them:
+
+```typescript
+import { Application } from '@curveball/core';
+import { router } from '@curveball/router';
+
+const app = new Application();
+
+app.use(
+  router('/articles', new Collection())
+);
+app.use(
+  router('/articles/:id', new Item())
+);
+```
+
+Negotiating the Accept header
+-----------------------------
+
+If you API supports multiple formats, for example `json` and `html`, you can
+use the `@accept` and `@method` annotations to automatically handle these.
+
+```typescript
+import { Controller, method, accept } from '@curveball/controller';
+import { Context } from '@curveball/core';
+
+class MyFancyController {
+
+  @method('GET')
+  @accept('application/json')
+  getJson(ctx: Context) {
+
+    ctx.response.type = 'application/json';
+    ctx.response.body = { 'hello': 'world' };
+
+  }
+
+  @method('GET')
+  @accept('html')
+  getHtml(ctx: Context) {
+
+    ctx.response.type = 'text/html';
+    ctx.response.body = '<h1>Hello world</h1>';
+
+  }
+
+}
+```
+
+This controller uses the `@method` annotation to automatically route
+a HTTP method to a controller function.
+
+If there was no match for the `@accept` annotation, the server will
+automatically throw `406 Not Acceptable`.
+
+It's possible to specify multiple `@accept` annotations. The `@accept`
+annotation contains a mimetype, but it's possible to only specify a part of
+the mimetype. For example, the following values for the `@accept` annotation
+will all match `application/hal+json`:
+
+* `json`
+* `application/*`
+* `*/json`
+* `application/json`
+* `application/hal+json`
+* `hal+json`
+* `application/hal+json; version=2`
+
+To make a specific function match any accept header, you can add an `@accept('*')`
+annotation
 
 [1]: https://github.com/curveballjs/
 [2]: https://github.com/curveballjs/router
