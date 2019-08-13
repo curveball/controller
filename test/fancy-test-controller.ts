@@ -27,4 +27,18 @@ export default class FancyTestController extends Controller {
 
   }
 
+  @accept('text/html')
+  put(ctx: Context) {
+
+    ctx.response.body = 'Should only work with a correct Accept header';
+
+  }
+
+  @accept('*')
+  report(ctx: Context) {
+
+    ctx.response.body = 'Fallback mimetype';
+
+  }
+
 }

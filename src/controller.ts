@@ -103,7 +103,10 @@ export default class Controller {
             }
           }
           if (!hasAnnotation) {
-            this.annotations.get(method)!.push({name: 'method', args: [httpMethod]});
+            this.annotations.get(method)!.push({
+              name: 'method',
+              args: [httpMethod]}
+            );
           }
         }
       }
