@@ -54,8 +54,10 @@
       ".ts"
     ]
   },
+  "peerDependency" :{
+    "@curveball/core": "^0.9.0"
+  },
   "dependencies": {
-    "@curveball/core": "^0.9.0",
     "@curveball/http-errors": "^0.3.0"
   }
 }
