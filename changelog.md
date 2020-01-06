@@ -1,10 +1,16 @@
 Changelog
 =========
 
+0.2.2 (2020-01-05)
+------------------
+
+* Allow installation on Curveball 0.10.
+
+
 0.2.1 (2019-09-13)
 ------------------
 
-* The curveball core got an update, so this updates all dependencies.
+* @curveball/core got an update, so this updates all dependencies.
 
 
 0.2.0 (2019-08-13)
