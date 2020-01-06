@@ -1,6 +1,6 @@
 {
   "name": "@curveball/controller",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "A simple controller pattern for Curveball.js",
   "main": "dist/index.js",
   "scripts": {
