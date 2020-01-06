@@ -36,6 +36,7 @@
   },
   "homepage": "https://github.com/curveball/controller#readme",
   "devDependencies": {
+    "@curveball/core": "^0.10.0",
     "@types/chai": "^4.2.7",
     "@types/mocha": "^5.2.7",
     "@types/node": "^10.17.13",
