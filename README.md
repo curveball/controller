@@ -125,7 +125,7 @@ use the `@accept` and `@method` annotations to automatically handle these.
 import { Controller, method, accept } from '@curveball/controller';
 import { Context } from '@curveball/core';
 
-class MyFancyController {
+class MyFancyController extends Controller {
 
   @method('GET')
   @accept('application/json')
