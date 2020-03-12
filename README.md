@@ -170,5 +170,5 @@ will all match `application/hal+json`:
 To make a specific function match any accept header, you can add an `@accept('*')`
 annotation
 
-[1]: https://github.com/curveballjs/
-[2]: https://github.com/curveballjs/router
+[1]: https://github.com/curveball/
+[2]: https://github.com/curveball/router
