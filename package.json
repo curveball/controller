@@ -60,5 +60,14 @@
   },
   "dependencies": {
     "@curveball/http-errors": "^0.3.0"
+  },
+  "mocha": {
+    "require": "ts-node/register",
+    "recursive": true,
+    "extension": [
+      "ts",
+      "js",
+      "tsx"
+    ]
   }
 }
