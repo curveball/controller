@@ -1,4 +1,4 @@
-import { Context, middlewareCall } from '@curveball/core';
+import { Context, invokeMiddlewares, Middleware, middlewareCall } from '@curveball/core';
 import { MethodNotAllowed, NotAcceptable, NotImplemented } from '@curveball/http-errors';
 import http from 'http';
 import { MethodAnnotation, RouteTable } from './types';
@@ -6,11 +6,13 @@ import { MethodAnnotation, RouteTable } from './types';
 export default class Controller {
 
   annotations: Map<string, MethodAnnotation[]>;
+  middleware: Map<string, Middleware[]>;
   routeTable: RouteTable;
 
   constructor() {
 
     this.autoAnnotateHttpMethods();
+    this.middleware = this.middleware === undefined ? new Map() : this.middleware;
     this.createRouteTable();
 
   }
@@ -69,15 +71,20 @@ export default class Controller {
     const route = this.routeTable.get(method)!;
     const acceptsMimeTypes = Array.from(route.accepts.keys());
     const acceptsResult = ctx.accepts(...acceptsMimeTypes);
+    let controllerMethod;
     if (!acceptsResult || !route.accepts.has(acceptsResult)) {
       if (!route.default) {
         throw new NotAcceptable('The mimeType specified in the Accept header is not supported. The following mimetypes are supported here: ' + acceptsMimeTypes.join(', ') );
       } else {
-        return (<any> this)[route.default](ctx);
+        controllerMethod = route.default;
       }
     } else {
-      return (<any> this)[route.accepts.get(acceptsResult)!](ctx);
+      controllerMethod = route.accepts.get(acceptsResult)!;
     }
+
+    return route.middleware === undefined
+      ? (<any> this)[controllerMethod](ctx)
+      : invokeMiddlewares(ctx, [...route.middleware.reverse(), (<any> this)[controllerMethod]]);
 
   }
 
@@ -144,10 +151,13 @@ export default class Controller {
       if (!this.routeTable.has(method)) {
         this.routeTable.set(method, {
           accepts: new Map(),
-          default: null
+          default: null,
+          middleware: this.middleware.get(controllerMethod),
         });
       }
       const route = this.routeTable.get(method)!;
+
+      route.middleware = this.middleware.get(controllerMethod);
 
       if (accepts.length === 0) {
         route.default = controllerMethod;

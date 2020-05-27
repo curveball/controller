@@ -1,3 +1,4 @@
+import { Middleware } from '@curveball/core';
 import Controller from './controller';
 
 export function method(httpMethod: string) {
@@ -9,6 +10,26 @@ export function method(httpMethod: string) {
 export function accept(mimeType: string) {
 
   return controllerDecorator('accept', mimeType);
+
+}
+
+/**
+ * This function returns a decorator which allows middleware to be applied to a specific controller route
+ */
+export function middleware(mw: Middleware) {
+
+  return (target: Controller, propertyKey: string) => {
+
+    if (!target.middleware) {
+      target.middleware = new Map();
+    }
+
+    if (!target.middleware.has(propertyKey)) {
+      target.middleware.set(propertyKey, []);
+    }
+    target.middleware.get(propertyKey)!.push(mw);
+
+  };
 
 }
 

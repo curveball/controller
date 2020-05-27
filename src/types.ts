@@ -1,3 +1,5 @@
+import { Middleware } from '@curveball/core';
+
 /**
  * A simple type to gather annotations on any method
  */
@@ -17,4 +19,7 @@ type MethodRoutes = {
 
   // If it's a string, it refers to a controller method, if it's null there is no default.
   default: string | null;
+
+  // Additional middleware specific to the route
+  middleware: Middleware[] | undefined;
 };

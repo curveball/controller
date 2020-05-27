@@ -2,6 +2,7 @@ import { Application } from '@curveball/core';
 import { expect } from 'chai';
 import FancyTestController from './fancy-test-controller';
 import BrokenTestController from './test-controller-broken';
+import MiddlewareController from './middleware-test-controller';
 
 describe('Controller Decorators', () => {
 
@@ -87,6 +88,20 @@ describe('Controller Decorators', () => {
       new BrokenTestController();
     }).to.throw(Error);
 
+  });
+  it('should apply middleware to routes when a middleware is specified as a decorator', async() => {
+
+    const app = new Application();
+    app.use(new MiddlewareController());
+    const response = await app.subRequest('GET', '/');
+    expect(response.status).to.equal(400);
+
+  });
+  it('should apply middleware to routes in order they are specified', async() => {
+    const app = new Application();
+    app.use(new MiddlewareController());
+    const response = await app.subRequest('POST', '/');
+    expect(response.body).to.equal('One Two Three');
   });
 
 });
