@@ -170,5 +170,34 @@ will all match `application/hal+json`:
 To make a specific function match any accept header, you can add an `@accept('*')`
 annotation
 
+
+WebSocket Support
+-----------------
+
+The Controller has built-in WebSocket support. Sample usage:
+
+
+```typescript
+import { Controller } from '@curveball/controller';
+import { Application, WsContext } from '@curveball/core';
+
+class MyController extends Controller {
+
+  webSocket(ctx: WsContext) {
+
+    ctx.webSocket.send('Hello');
+
+  }
+
+}
+
+const app = new Application();
+app.use(new MyController());
+
+// Listen on port 5000 for Websocket
+app.listenWs(5000);
+```
+
+
 [1]: https://github.com/curveball/
 [2]: https://github.com/curveball/router
