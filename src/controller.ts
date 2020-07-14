@@ -5,8 +5,8 @@ import { MethodAnnotation, RouteTable } from './types';
 
 export default class Controller {
 
-  annotations: Map<string, MethodAnnotation[]>;
-  routeTable: RouteTable;
+  annotations!: Map<string, MethodAnnotation[]>;
+  routeTable!: RouteTable;
 
   constructor() {
 
