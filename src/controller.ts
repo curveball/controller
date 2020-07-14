@@ -1,5 +1,5 @@
-import { Context, middlewareCall } from '@curveball/core';
-import { MethodNotAllowed, NotAcceptable, NotImplemented } from '@curveball/http-errors';
+import { Context, middlewareCall, WsContext } from '@curveball/core';
+import { MethodNotAllowed, NotAcceptable, NotImplemented, BadRequest } from '@curveball/http-errors';
 import http from 'http';
 import { MethodAnnotation, RouteTable } from './types';
 
@@ -35,6 +35,15 @@ export default class Controller {
   }
 
   /**
+   * Handle Websocket requests
+   */
+  webSocket(ctx: WsContext): void | Promise<void> {
+
+    throw new BadRequest('Websocket connections are not supported at this endpoint');
+
+  }
+
+  /**
    * This middlewareCall symbol is a special function that marks
    * an object as a curveball middleware.
    *
@@ -59,6 +68,11 @@ export default class Controller {
     if (!http.METHODS.includes(method)) {
       throw new NotImplemented(method + ' is not implemented');
     }
+
+    if (isWsContext(ctx)) {
+      return this.webSocket(ctx);
+    }
+
     if (!this.routeTable.has(method)) {
       throw new MethodNotAllowed(
         method + ' is not allowed',
@@ -164,5 +178,11 @@ export default class Controller {
     }
 
   }
+
+}
+
+function isWsContext(ctx: Context): ctx is WsContext {
+
+  return ctx.webSocket!==undefined;
 
 }
