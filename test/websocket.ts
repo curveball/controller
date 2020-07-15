@@ -12,7 +12,7 @@ class WsController extends Controller {
   }
 
 }
-describe("Websocket support", () => {
+describe('Websocket support', () => {
 
   it('should start a websocket server', () => {
 
