@@ -16,14 +16,14 @@ export default class FancyTestController extends Controller {
   @accept('application/hal+json')
   getJson(ctx: Context) {
 
-    ctx.response.body = { foo: 'bar' }
+    ctx.response.body = { foo: 'bar' };
 
   }
 
   @method('POST')
   notPost(ctx: Context) {
 
-    ctx.response.body = 'actually it was POST'
+    ctx.response.body = 'actually it was POST';
 
   }
 
