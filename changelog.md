@@ -1,9 +1,12 @@
 Changelog
 =========
 
-0.2.3 (?)
----------
+0.3.0 (2020-08-02)
+------------------
 
+* WebSocket support. If you create a function named `webSocket` in your
+  controller, it will be automatically called when a websocket connection is
+  opened.
 * Typescript target is now `es2019` instead of `esnext` to ensure that older
   Node.js versions are supported.
 
