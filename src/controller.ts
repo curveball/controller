@@ -1,6 +1,7 @@
+/* eslint @typescript-eslint/no-unused-vars:0 */
 import { Context, middlewareCall, WsContext } from '@curveball/core';
 import { MethodNotAllowed, NotAcceptable, NotImplemented, BadRequest } from '@curveball/http-errors';
-import http from 'http';
+import * as http from 'http';
 import { MethodAnnotation, RouteTable } from './types';
 
 export default class Controller {

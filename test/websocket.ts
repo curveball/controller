@@ -1,4 +1,4 @@
-import WebSocket from 'ws';
+import * as WebSocket from 'ws';
 import { Controller } from '../src';
 import { Application, WsContext } from '@curveball/core';
 import { expect } from 'chai';
@@ -19,8 +19,8 @@ describe('Websocket support', () => {
     const app = new Application();
     app.use(new WsController());
     const wss = app.listenWs(57001);
-   
-    return new Promise(res => {
+
+    return new Promise<void>(res => {
       const ws = new WebSocket('ws://localhost:57001');
       ws.on('message', (msg) => {
 
