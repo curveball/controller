@@ -19,7 +19,7 @@ describe('Websocket support', () => {
     const app = new Application();
     app.use(new WsController());
     const wss = app.listenWs(57001);
-   
+
     return new Promise(res => {
       const ws = new WebSocket('ws://localhost:57001');
       ws.on('message', (msg) => {
