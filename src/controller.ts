@@ -88,10 +88,10 @@ export default class Controller {
       if (!route.default) {
         throw new NotAcceptable('The mimeType specified in the Accept header is not supported. The following mimetypes are supported here: ' + acceptsMimeTypes.join(', ') );
       } else {
-        return (<any> this)[route.default](ctx);
+        return (this as any)[route.default](ctx);
       }
     } else {
-      return (<any> this)[route.accepts.get(acceptsResult)!](ctx);
+      return (this as any)[route.accepts.get(acceptsResult)!](ctx);
     }
 
   }
@@ -106,7 +106,7 @@ export default class Controller {
     }
     for (const httpMethod of http.METHODS) {
       const method = httpMethod.toLowerCase();
-      if (typeof (<any> this)[method] === 'function') {
+      if (typeof (this as any)[method] === 'function') {
         if (!this.annotations.has(method)) {
           this.annotations.set(method, [{name: 'method', args: [httpMethod]}]);
         } else {
