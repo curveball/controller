@@ -7,7 +7,7 @@ Changelog
 * Releasing on Github packages.
 * Updated lint rules
 * Updated dependencies
-* No functional change
+* No functional changes
 
 0.3.0 (2020-08-02)
 ------------------
