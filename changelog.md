@@ -5,7 +5,7 @@ Changelog
 ------------------
 
 * Releasing on Github packages.
-* Lint rule edit
+* Updated lint rules
 * Updated dependencies
 * No functional change
 
