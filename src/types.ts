@@ -2,8 +2,8 @@
  * A simple type to gather annotations on any method
  */
 export type MethodAnnotation = {
-  name: string,
-  args: string[],
+  name: string;
+  args: string[];
 };
 
 /**
