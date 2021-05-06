@@ -1,6 +1,14 @@
 Changelog
 =========
 
+0.3.1 (2021-05-06)
+------------------
+
+* Releasing on Github packages.
+* Updated lint rules
+* Updated dependencies
+* No functional changes
+
 0.3.0 (2020-08-02)
 ------------------
 
