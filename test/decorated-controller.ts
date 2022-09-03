@@ -1,4 +1,4 @@
-import { Application } from '@curveball/core';
+import { Application } from '@curveball/kernel';
 import { expect } from 'chai';
 import FancyTestController from './fancy-test-controller';
 import BrokenTestController from './test-controller-broken';

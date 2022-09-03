@@ -1,5 +1,5 @@
 import { Controller, method, accept } from '../src';
-import { Context } from '@curveball/core';
+import { Context } from '@curveball/kernel';
 
 export default class FancyTestController extends Controller {
 
