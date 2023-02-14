@@ -1,7 +1,10 @@
-import * as WebSocket from 'ws';
-import { Controller } from '../src';
+import * as WebSocketImp from 'ws';
+import { Controller } from '../src/index.js';
 import { Application, WsContext } from '@curveball/core';
 import { expect } from 'chai';
+
+// @ts-expect-error ESM shenanigans
+const WebSocket = WebSocketImp.default ?? WebSocketImp;
 
 class WsController extends Controller {
 
@@ -22,7 +25,7 @@ describe('Websocket support', () => {
 
     return new Promise<void>(res => {
       const ws = new WebSocket('ws://localhost:57001');
-      ws.on('message', (msg) => {
+      ws.on('message', (msg:any) => {
 
         expect(msg.toString()).to.equal('Hello');
         ws.close();

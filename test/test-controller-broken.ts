@@ -1,4 +1,4 @@
-import { Controller, accept } from '../src';
+import { Controller, accept } from '../src/index.js';
 import { Context } from '@curveball/kernel';
 
 export default class TestControllerBroken extends Controller {
