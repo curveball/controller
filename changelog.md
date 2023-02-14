@@ -1,6 +1,13 @@
 Changelog
 =========
 
+0.5.0 (????-??-??)
+------------------
+
+* This package now supports ESM and CommonJS modules.
+* No longer supports Node 14. Please use Node 16 or higher.
+
+
 0.4.0 (2022-09-03)
 ------------------
 
@@ -14,6 +21,7 @@ Changelog
 * Updated lint rules
 * Updated dependencies
 * No functional changes
+
 
 0.3.0 (2020-08-02)
 ------------------
