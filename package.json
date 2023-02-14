@@ -84,8 +84,5 @@
     "extension": [
       ".ts"
     ]
-  },
-  "peerDependency": {
-    "@curveball/core": ">=0.16 <1"
   }
 }
