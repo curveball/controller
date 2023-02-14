@@ -1,4 +1,4 @@
-import { Controller, method, accept } from '../src';
+import { Controller, method, accept } from '../src/index.js';
 import { Context } from '@curveball/kernel';
 
 export default class FancyTestController extends Controller {

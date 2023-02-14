@@ -1,2 +1,2 @@
-export { default as Controller, default as default } from './controller';
-export { method, accept } from './decorators';
+export { default as Controller, default as default } from './controller.js';
+export { method, accept } from './decorators.js';

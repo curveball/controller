@@ -1,7 +1,7 @@
 import { Application } from '@curveball/kernel';
 import { expect } from 'chai';
-import FancyTestController from './fancy-test-controller';
-import BrokenTestController from './test-controller-broken';
+import FancyTestController from './fancy-test-controller.js';
+import BrokenTestController from './test-controller-broken.js';
 
 describe('Controller Decorators', () => {
 
