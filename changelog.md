@@ -10,6 +10,8 @@ Changelog
   ESM is the future, so we're dropping CommonJS.
 * Now requires Node 18.
 * Upgraded to Typescript 5.3.
+* Using Typescript 5 decorators, which means experimentalDecorators (the
+  old-style decorators) are no longer needed.
 
 
 0.5.0 (2023-02-14)

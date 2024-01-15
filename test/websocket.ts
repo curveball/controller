@@ -1,10 +1,7 @@
-import * as WebSocketImp from 'ws';
+import WebSocket from 'ws';
 import { Controller } from '../src/index.js';
 import { Application, WsContext } from '@curveball/core';
 import { expect } from 'chai';
-
-// @ts-expect-error ESM shenanigans
-const WebSocket = WebSocketImp.default ?? WebSocketImp;
 
 class WsController extends Controller {
 
