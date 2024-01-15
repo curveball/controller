@@ -10,10 +10,7 @@ export default class Controller {
   routeTable!: RouteTable;
 
   constructor() {
-
     this.autoAnnotateHttpMethods();
-    this.createRouteTable();
-
   }
 
   /**
@@ -38,7 +35,7 @@ export default class Controller {
   /**
    * Handle Websocket requests
    */
-  webSocket(ctx: WsContext): void | Promise<void> {
+  webSocket(_ctx: WsContext): void | Promise<void> {
 
     throw new BadRequest('Websocket connections are not supported at this endpoint');
 
@@ -65,6 +62,9 @@ export default class Controller {
    */
   dispatch(ctx: Context): Promise<void> | void {
 
+    if (!this.routeTable) {
+      this.rebuildRouteTable();
+    }
     const method = ctx.request.method;
     if (!http.METHODS.includes(method)) {
       throw new NotImplemented(method + ' is not implemented');
@@ -130,10 +130,10 @@ export default class Controller {
   }
 
   /**
-   * This method uses the information from annotations to create
-   * routes
+   * This method uses the information from annotations and class methods to
+   * create an optimized route table.
    */
-  private createRouteTable(): void {
+  private rebuildRouteTable(): void {
 
     this.routeTable = new Map();
     for (const [controllerMethod, annotations] of this.annotations) {
@@ -153,7 +153,8 @@ export default class Controller {
       }
 
       if (method === null) {
-        throw new Error('Controller method ' + controllerMethod + ' was annotated, but it needs a @method annotation to actually do anything');
+        console.error(`[ERROR] Controller method "${controllerMethod}" was annotated, but it needs a @method annotation to actually do anything`);
+        continue;
       }
 
       if (!this.routeTable.has(method)) {

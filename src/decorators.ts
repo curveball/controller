@@ -21,18 +21,24 @@ export function accept(mimeType: string) {
  */
 export function controllerDecorator(annotationName: string, ...args: any[]) {
 
-  return (target: Controller, propertyKey: string) => {
+  return function actualDecorator(_originalMethod: any, context: ClassMethodDecoratorContext<Controller>) {
 
-    if (!target.annotations) {
-      target.annotations = new Map();
-    }
+    context.addInitializer(function() {
 
-    if (!target.annotations.has(propertyKey)) {
-      target.annotations.set(propertyKey, []);
-    }
-    target.annotations.get(propertyKey)!.push({
-      name: annotationName,
-      args: args
+      const methodName = String(context.name);
+
+      if (!this.annotations) {
+        this.annotations = new Map();
+      }
+
+      if (!this.annotations.has(methodName)) {
+        this.annotations.set(methodName, []);
+      }
+      this.annotations.get(methodName)!.push({
+        name: annotationName,
+        args: args
+      });
+
     });
 
   };

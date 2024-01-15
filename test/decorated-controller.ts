@@ -1,7 +1,6 @@
 import { Application } from '@curveball/kernel';
 import { expect } from 'chai';
 import FancyTestController from './fancy-test-controller.js';
-import BrokenTestController from './test-controller-broken.js';
 
 describe('Controller Decorators', () => {
 
@@ -21,7 +20,7 @@ describe('Controller Decorators', () => {
     app.use(new FancyTestController());
     const response = await app.subRequest('OPTIONS', '/');
     expect(response.status).to.equal(200);
-    expect(response.headers.get('Allow')).to.equal('GET, POST, PUT, REPORT, OPTIONS');
+    expect(response.headers.get('Allow')).to.equal('OPTIONS, PUT, REPORT, GET, POST');
 
   });
 
@@ -79,13 +78,6 @@ describe('Controller Decorators', () => {
     const response = await app.subRequest('GET', '/', { 'Accept': 'image/jpeg' });
 
     expect(response.status).to.equal(406);
-
-  });
-  it('should throw an error when instantiating a controller with an unreacheable method', async() => {
-
-    expect(() => {
-      new BrokenTestController();
-    }).to.throw(Error);
 
   });
 

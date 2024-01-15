@@ -1,6 +1,23 @@
 Changelog
 =========
 
+1.0.0 (2024-01-15)
+------------------
+
+* Finally! Curveball v1. Only took 6 years.
+* CommonJS support has been dropped. The previous version of this library
+  supported both CommonJS and ESM. The effort of this no longer feels worth it.
+  ESM is the future, so we're dropping CommonJS.
+* Now requires Node 18.
+* Upgraded to Typescript 5.3.
+* Using Typescript 5 decorators, which means `experimentalDecorators` (the
+  old-style decorators) are no longer needed. If you are upgrading from an
+  older version, you should remove `experimentalDecorators`.
+* Decorators/Annotations for which the method can not be determined (either
+  because the method is not a well-known http method and there is no `@method`
+  annotation), we will now only warn and not crash.
+
+
 0.5.0 (2023-02-14)
 ------------------
 
